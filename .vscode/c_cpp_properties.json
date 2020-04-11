@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Users\\iman\\Documents\\Arduino\\hardware\\WAV\\avr\\**",
+                "C:\\Users\\iman\\Documents\\Arduino\\libraries\\IRremote\\**",
+                "C:\\Users\\iman\\Documents\\Arduino\\libraries\\Slip\\**",
+                "C:\\Users\\iman\\Documents\\Arduino\\libraries\\SoftwareSerial\\**"
+            ],
+            "defines": [
+                "F_CPU=16000000L",
+                "ARDUINO=10810",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO_AVR_LARDU_328E",
+                "USBCON"
+            ],
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
