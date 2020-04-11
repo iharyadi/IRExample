@@ -1,5 +1,0 @@
-{
-    "port": "COM16",
-    "board": "arduino:avr:uno",
-    "sketch": "IRrecvDemo.ino"
-}
