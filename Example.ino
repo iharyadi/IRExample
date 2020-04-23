@@ -92,6 +92,9 @@ struct __attribute__((packed)) irTransmitUnknownData:public irTransmitDataBase
 
 void slipReadCallback(uint8_t * buff,uint8_t len)
 { 
+
+  Serial.println("Packet Received");
+
   irTransmitDataBase* pIrData = (irTransmitDataBase*) buff;
 
   if(pIrData->page != 0)
@@ -126,10 +129,7 @@ void slipReadCallback(uint8_t * buff,uint8_t len)
     break;
   }
   }
-  irrecv.enableIRIn();
-  irrecv.enableIRIn();
-  irrecv.enableIRIn();
-  irrecv.enableIRIn();
+ 
   irrecv.enableIRIn();
   
 }
