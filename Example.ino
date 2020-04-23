@@ -15,7 +15,7 @@
 
 #define MAX_RAW_DATA 32
 SoftwareSerial mySerial(4, 5);
-Slip slip(mySerial);
+SoftwareSlip slip(mySerial);
 
 int RECV_PIN = 2;
 
@@ -53,6 +53,19 @@ struct __attribute__((packed)) irReceiverData:public irReceiverDataBase
 	uint16_t address;     
 	uint32_t value;       
 	int16_t  bits;
+};
+
+struct __attribute__((packed)) ASCIIReceiverData:public irReceiverDataBase
+{
+  ASCIIReceiverData(uint8_t _command,
+    uint8_t _page,
+    decode_type_t _decode_type,
+    char* str):
+    irReceiverDataBase {_command, _page, _decode_type}
+    {
+      strncpy(asciiData,str,sizeof(asciiData));
+    };
+	char asciiData[10];     
 };
 
 struct __attribute__((packed)) irReceiverUnknownData:public irReceiverDataBase
@@ -140,6 +153,8 @@ void setup()
   irrecv.enableIRIn(); // Start the receiver
   mySerial.begin(9600);
   slip.setCallback(slipReadCallback);
+
+  pinMode(7,INPUT_PULLUP);
 }
 
 void SendToHubIRReceived(decode_results& irpacket)
@@ -175,6 +190,23 @@ void SendToHubIRReceived(decode_results& irpacket)
   }
 }
 
+void ExampleToSendAscii()
+{
+
+
+  if(digitalRead(7) == LOW)
+  {
+    char* Test[] = {"helo","world"};
+    
+    static uint8_t i = 0;
+
+    ASCIIReceiverData data(0u,1u,UNUSED,Test[i]);
+
+    slip.sendpacket((uint8_t*)&data,sizeof(data));
+    
+    i = ++i%2;
+  }
+}
 void loop() {
   slip.proc();
   if (irrecv.decode(&results)) {
@@ -183,5 +215,8 @@ void loop() {
 
     SendToHubIRReceived(results);
   }
+
+  ExampleToSendAscii();
+
   delay(100);
 }
